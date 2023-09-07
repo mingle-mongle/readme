@@ -1,3 +1,5 @@
+[✔]: ./image/checkbox-small-blue.png
+
 # GUZZI 프로젝트
 
 <br/>
@@ -185,7 +187,21 @@
 
 # `4. DB 구성`
 
-## ![✔] 4.1 다른건 못해도 최소한 API (컴포넌트) 테스트는 써라
+## data Table Schema
+
+채팅 메세지에 관련된 정보를 저장합니다.
+
+|  Field  |     Type     | Null |     Key     |       Default       |                     Extra                     |
+| :-----: | :----------: | :--: | :---------: | :-----------------: | :-------------------------------------------: |
+| msg_id  |  BINARY(16)  |  NO  | PRIMARY KEY | UUID_TO_BIN(UUID()) |               DEFAULT_GENERATED               |
+| content |     TEXT     |  NO  |     YES     |                     |                                               |
+|  type   | VARCHAR(255) | YES  |             |                     |                                               |
+|  time   |  BIGINT(20)  | YES  |             |                     |                                               |
+|  image  |     TEXT     | YES  |             |                     |                                               |
+| created |  TIMESTAMP   |  NO  |             |  CURRENT_TIMESTAMP  |               DEFAULT_GENERATED               |
+| updated |  TIMESTAMP   | YES  |             |  CURRENT_TIMESTAMP  | DEFAULT_GENERATED ON UPDATE CURRENT TIMESTAMP |
+|  user   |     JSON     | YES  |             |                     |                                               |
+| version | VARCHAR(255) | YES  |             |                     |                                               |
 
 <br/>
 
@@ -195,11 +211,7 @@
 
 ## ![✔] 5.1. Swagger
 
-**핵심요약:** 모니터링은 고객이 문제를 발견하기 전에 먼저 발견하는 게임이다. 모니터링에는 분명히 전례가없는 중요성을 부여해야한다. 솔루션에 너무 많은 기능들이 들어가 있을 가능성이 있으므로 확인해야만하는 기본 항목을 내부적으로 정의하고 나서 추가적인 기능들을 살펴보고 필요한 기능들이 모두 들어있는 솔루션을 선택하라. 아래의 'gist'를 클릭하면 솔루션 개요를 볼 수 있다
-
-**그렇게 하지 않을 경우:** 오류 === 고객의 실망. 간단하다
-
-🔗 [**자세히 보기: 모니터링!**](./sections/production/monitoring.md)
+🔗 [**Swagger Link : API 테스트 가능**](링크 넣어야함)
 
 <br/>
 
@@ -207,43 +219,38 @@
 
 # `6. 성능 테스트`
 
-<div align="center">
-<img src="https://img.shields.io/badge/OWASP%20Threats-Top%2010-green.svg" alt="54 items"/>
-</div>
+## ![✔] 6.1. 10분 테스트 내용(수정예정)
 
-## ![✔] 6.1. linter 보안 규칙 수용
+<img src="./image/test.png"/>
 
-<a href="https://www.owasp.org/index.php/Top_10-2017_A1-Injection" target="_blank"><img src="https://img.shields.io/badge/%E2%9C%94%20OWASP%20Threats%20-%20A1:Injection%20-green.svg" alt=""/></a> <a href="https://www.owasp.org/index.php/Top_10-2017_A7-Cross-Site_Scripting_(XSS)" target="_blank"><img src="https://img.shields.io/badge/%E2%9C%94%20OWASP%20Threats%20-%20XSS%20-green.svg" alt=""/></a>
+이 부분은 추가적으로 다시 테스트 한 후 수정할 예정입니다.
+포스트맨 캡쳐 사용하지 않을 예정입니다.
 
-**핵심요약:** [eslint-plugin-security](https://github.com/nodesecurity/eslint-plugin-security)와 같은 보안 관련 linter 플러그인을 사용하여 보안 취약점과 문제점을 가능한 한 빨리 잡아라. 이것은 eval 사용, 자식 프로세스 호출, string literal(예: 사용자 입력)을 쓰는 모듈 불러오기 같은 보안 취약점을 잡는데 도움이 될 수 있다. 보안 linter가 잡는 코드를 보려면, 아래의 '자세히 보기'을 클릭해라.
-
-**그렇게 하지 않을 경우:** 개발과정에서는 이해하기 쉬운 보안 약점이었음에도 상용환경에서는 주요쟁점이 된다. 또, 프로젝트가 일관된 보안 프렉티스를 따르지 않아, 취약점이 노출되거나 민감한 정보가 원격 저장소에 유출될 수 있다.
-
-🔗 [**자세히 보기: Lint rules**](./sections/security/lintrules.md)
+**핵심요약:** 10분간 어쩌구저쩌구.. 테스트했을시.. 어쩌구저쩌구..
 
 <br/>
 
-<p align="right"><a href="#목차">⬆ Return to top</a></p>
+<p align="right"><a href="#목차">⬆ 목차로 돌아가기</a></p>
 
 # `7. 트러블 슈팅`
 
-<br/><br/>
+<br/>
 
-## ![✔] 7.1. 이벤트 루프를 막지 말아라
+## ![✔] 7.1. DB Buffer Memory 문제
 
-**핵심요약:** CPU 집약적인 과제들은 거의 단일 스레드로 된 이벤드 루프를 블로킹하고 전용 스레드나 프로세스, 혹은 컨텍스트에 따라 그 외 다른 기술에 떠넘기므로 피하라.
+**핵심요약:** Sort Buffer Memory 부족을 해결하기 위해 인덱스를 사용했다.
 
-**그렇게 하지 않을 경우:** 이벤트 루프가 블로킹되면 Node.js는 다른 요청을 처리할 수 없게 되어 동시성 (concurrent) 사용자들을 지체하게 한다. **사용자 3000명이 응답을 기다리고 있고, 콘텐츠도 제공될 준비가 되어있는데, 단 하나의 요청이 서버가 결과물을 발송하지 못하도록 블로킹 할 수 있다**
+**그렇게 하지 않을 경우:** 데이터가 262KB(이미지 25개)이상 들어간 후 "ORDER BY" 쿼리를 사용하면 `out of sort memory (errno 1038)`가 발생한다.
 
-🔗 [**자세히 보기: Do not block the event loop**](./sections/performance/block-loop.md)
+<img src="./image/graph.png">
 
-<br /><br /><br />
+| 방법             | 인덱스 사용 | 총 요청 수 | 초당 요청 수 | 평균 응답 시간 | 최대 응답 시간 | Error % |
+| ---------------- | ----------- | ---------- | ------------ | -------------- | -------------- | ------- |
+| DESC 인덱스 사용 | O           | 11,669     | 19.28        | 180~220 ms     | 3,212          | 0       |
+| 쿼리 2번 요청    | X           | 11,652     | 19.25        | 80~100 ms      | 4,809          | 0       |
 
-## ![✔] 7.2. Lodash같은 user-land 유틸 대신 네이티브 자바스크립트 메소드를 택해라
+🔗 [**자세히 보기: DB Buffer Memory 문제**](bufferMemory.md)
 
-**핵심요약:** 네이티브 메소드 대신 `lodash` 나 `underscore` 같은 유틸 라이브러리를 쓰는 것은 불필요한 의존성이나 성능 저하를 야기할 수 있기에 보통 페날티가 붙는다.
-새로운 V8 엔진과 함께 새로운 ES 기준이 도입되고부터 네이티브 메소드가 유틸리티 라이브러리보다 50% 더 능률적이라는 것을 명심해라.
+<br/>
 
-**그렇게 하지 않을 경우:** 기본적으로 **이미** 내장된 코드를 쓰거나 코드를 몇줄 더 써서 파일을 몇개 더 써야 하는 것을 막을 수 있었음에도 불구하고 더 비능률적인 프로젝트를 유지해야 할 것이다.
-
-🔗 [**자세히 보기: Native over user land utils**](./sections/performance/nativeoverutil.md)
+<p align="right"><a href="#목차">⬆ 목차로 돌아가기</a></p>
