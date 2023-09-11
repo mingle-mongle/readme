@@ -100,7 +100,7 @@
 
 <details open="open">
   <ul style="list-style: none">
-  <li> ᐅ 아키텍처 </li>
+  <li style="list-style: none"> ᐅ 아키텍처 </li>
 	<table align="center">
 		<tr>
 			<td align="center"><b>3tier architecture</b></td>
