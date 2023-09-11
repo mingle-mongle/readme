@@ -280,9 +280,8 @@
 ## PlanetScale 외래키 적용 불가능
 
 **핵심요약** </br>
-PlanetScale에서 외래키 생성이 불가능하여 mysql의 JSON type을 활용하여 user 컬럼을 생성했습니다.</br>
 
-</br>
+> PlanetScale에서 외래키 생성이 불가능하여 mysql의 `JSON type`을 활용하여 user 컬럼을 생성했습니다.</br>
 
 ### **1. 문제 정의**
 
@@ -294,6 +293,8 @@ VT10001: foreign key constraints are not allowed
   - PlanetScale 테이블 생성 시 외래키 생성 불가
 - 문제 발생 원인
   - PlanetScale은 외래키를 지원하지 않음.
+
+</br>
 
 ### **2. 문제 해결 과정**
 
@@ -329,10 +330,14 @@ CREATE TABLE `user` (
 - user 객체 안에는 “ip”, “role”, “uuid”, “device_id”가 추가됩니다.
 - SELECT 쿼리 요청 시 JOIN 을 할 필요 없이, 바로 user 정보를 가져올 수 있기 때문에 JSON을 사용하는 방법이 더 효율적이라고 생각했습니다.
 
+</br>
+
 ### **3. 문제 해결 결과**
 
 - 외래키를 생성하지 않고 JSON type을 활용해 user 컬럼을 생성했습니다.
 - 외래키를 사용하는 것이 이상적인 설계이지만, 외래키가 지원되지 않는 상황이라면 JSON type을 활용하는 방법도 좋은 방법이라고 생각합니다.
+
+</br>
 
 ### **4. 참고 자료 및 링크**
 
@@ -355,10 +360,12 @@ CREATE TABLE `user` (
 ## DB Buffer Memory
 
 **핵심요약** </br>
-Sort Buffer Memory 부족을 해결하기 위해 인덱스를 사용했습니다.</br>
+
+> Sort Buffer Memory 부족을 해결하기 위해 인덱스를 사용했습니다.</br>
 
 **그렇게 하지 않을 경우** </br>
-데이터가 262KB(이미지 25개)이상 들어간 후 `ORDER BY` 쿼리를 사용하면 `out of sort memory (errno 1038)`가 발생합니다. </br>
+
+> 데이터가 262KB(이미지 25개)이상 들어간 후 `ORDER BY` 쿼리를 사용하면 `out of sort memory (errno 1038)`가 발생합니다. </br>
 
 ### **1. 문제 정의**
 
@@ -373,14 +380,14 @@ Sort Buffer Memory 부족을 해결하기 위해 인덱스를 사용했습니다
 
 ```sql
 SELECT BIN_TO_UUID AS msg_id
-		 , content
-		 , type
-		 , time
-		 , image
-		 , created
-		 , updated
-		 , user
-		 , version
+	, content
+	, type
+	, time
+	, image
+	, created
+	, updated
+	, user
+	, version
   FROM data
  ORDER
     BY created DESC
@@ -424,9 +431,9 @@ SELECT BIN_TO_UUID AS msg_id
 		 , version
   FROM (
         SELECT *
-				  FROM data
-         ORDER
-            BY msg_id DESC
+				FROM data
+        ORDER
+        BY msg_id DESC
        ) AS Data
  LIMIT 20
 OFFSET 0;
@@ -444,14 +451,14 @@ SELECT COUNT(*) FROM data;
 
 ```sql
 SELECT BIN_TO_UUID AS msg_id
-		 , content
-		 , type
-		 , time
-		 , image
-		 , created
-		 , updated
-		 , user
-		 , version
+  , content
+	, type
+	, time
+	, image
+	, created
+	, updated
+	, user
+	, version
   FROM data
  LIMIT 20
 OFFSET (총 row - 20);
@@ -464,18 +471,18 @@ OFFSET (총 row - 20);
 
 ```sql
 SELECT BIN_TO_UUID AS msg_id
-		 , content
-		 , type
-		 , time
-		 , image
-		 , created
-		 , updated
-		 , user
-		 , version
+  , content
+  , type
+	, time
+	, image
+	, created
+	, updated
+	, user
+	, version
   FROM data
  WHERE time >= (
       SELECT
-				    time
+			  time
 			FROM data
       LIMIT 1
       OFFSET 20
