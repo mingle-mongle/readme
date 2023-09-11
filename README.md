@@ -271,9 +271,9 @@
 
 <br/>
 트러블 슈팅 목차
-7.1. [DB Buffer Memory 문제](#7.1.-db-buffer-memory-문제)
+7.1. [DB Buffer Memory 문제](##7.1.-db-buffer-memory-문제)
 
-## ![✔] 7.1. DB Buffer Memory 문제
+<!-- ## ![✔] 7.1. DB Buffer Memory 문제 -->
 
 **핵심요약:** Sort Buffer Memory 부족을 해결하기 위해 인덱스를 사용했다.
 
