@@ -99,7 +99,23 @@
 # `3. 아키텍처 시각화`
 
 <details open="open">
-  <ul style="list-style: none;">
+  <ul style="list-style: none">
+  <li> ᐅ 아키텍처 </li>
+	<table align="center">
+		<tr>
+			<td align="center"><b>3tier architecture</b></td>
+		</tr>
+		<tr>
+			<td align="center">
+				<img src="./image/archi.png">
+			</td>
+		</tr>
+		<tr>
+			<td align="center">
+				.
+			</td>
+		</tr>
+	</table>
     <li> ᐅ GET </li>
 	<table align="center">
 		<tr>
