@@ -10,7 +10,7 @@
 
 1. [프로젝트 설명](#1-프로젝트-설명)
 2. [기술 스택](#2-기술-스택-Technique-Used)
-3. [아키텍처 시각화](#3-아키텍처-시각화)
+3. [아키텍처 시각화](#3-아키텍처-및-시퀀스-다이어그램)
 4. [DB 구성](#4-DB-구성)
 5. [API-명세](#5-API-명세)
 6. [성능 테스트](#6-성능-테스트)
@@ -20,9 +20,17 @@
 
 # `1. 프로젝트 설명`
 
+## 프로젝트 설명
+
 **GUZZI**는 소비로서 마음을 채우는게 아니라 절약으로서 나 스스로를 명품으로 만들자 라는 의미로 만들어졌습니다. <br/>
 최근 경기악화와 물가상승, 금리 인상 등으로 으로 인해 생활비를 절약하자는 분위기가 생성되고 있습니다. <br/>
 혼자서는 소비를 절제하기 힘들지만 함께 절약함으로써 동기부여도 되고, 절약을 즐겁게 만들고 싶어 제작하게 되었습니다.
+
+## 프로젝트 링크
+
+최종 배포 링크 : https://all-chat.netlify.app/guzzi
+백엔드 Repo 링크 : https://github.com/mingle-mongle/guzzi
+프론트엔드 Repo 링크 : https://github.com/HyeyonJ/room-of-GUZZI
 
 ## Directory Structure
 
@@ -96,11 +104,11 @@
 
 <p align="right"><a href="#목차">⬆ 목차로 돌아가기</a></p>
 
-# `3. 아키텍처 시각화`
+# `3. 아키텍처 및 시퀀스 다이어그램`
 
 <details open="open">
-  <ul style="list-style: none">
-  <li style="list-style: none"> ᐅ 아키텍처 </li>
+  <ul>
+  <li> ᐅ 아키텍처 </li>
 	<table align="center">
 		<tr>
 			<td align="center"><b>3tier architecture</b></td>
@@ -112,7 +120,9 @@
 		</tr>
 		<tr>
 			<td align="center">
-				.
+				Client : REACT
+        Server : Aws App Runner(Express)
+        Database : PlanetScale(MySQL)
 			</td>
 		</tr>
 	</table>
@@ -128,11 +138,9 @@
 		</tr>
 		<tr>
 			<td align="center">
-				<ul style="list-style: none;">
-          <li>Page 최솟값 : 1</li>
-          <li>Page 숫자 Validation Check</li>
-          <li>DB에서 받아온 데이터 Validation Check</li>
-        </ul>
+				페이지 Validation check를 한 후, 올바른 요청일 경우 DB에 쿼리를 넘깁니다.
+        받아온 데이터에 이상이 있을 수 있으니, 데이터도 Validation check를 해줍니다.
+        정확한 데이터일 경우 200 OK 요청과 데이터를 보내줍니다.       
 			</td>
 		</tr>
 	</table>
