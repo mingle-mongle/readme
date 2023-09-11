@@ -9,10 +9,10 @@
 ## 목차
 
 1. [프로젝트 설명](#1-프로젝트-설명)
-2. [기술 스택](#2-기술-스택-Technique-Used)
+2. [기술 스택](#2-기술-스택-technique-used)
 3. [아키텍처 시각화](#3-아키텍처-및-시퀀스-다이어그램)
-4. [DB 구성](#4-DB-구성)
-5. [API-명세](#5-API-명세)
+4. [DB 구성](#4-db-구성)
+5. [API-명세](#5-api-명세)
 6. [성능 테스트](#6-성능-테스트)
 7. [트러블 슈팅](#7-트러블-슈팅)
 
@@ -28,9 +28,9 @@
 
 ## 프로젝트 링크
 
-최종 배포 링크 : https://all-chat.netlify.app/guzzi
-백엔드 Repo 링크 : https://github.com/mingle-mongle/guzzi
-프론트엔드 Repo 링크 : https://github.com/HyeyonJ/room-of-GUZZI
+최종 배포 링크 : https://all-chat.netlify.app/guzzi </br>
+백엔드 Repo 링크 : https://github.com/mingle-mongle/guzzi </br>
+프론트엔드 Repo 링크 : https://github.com/HyeyonJ/room-of-GUZZI </br>
 
 ## Directory Structure
 
@@ -138,9 +138,9 @@
 		</tr>
 		<tr>
 			<td align="center">
-				페이지 Validation check를 한 후, 올바른 요청일 경우 DB에 쿼리를 넘깁니다. </br>
+				페이지 Validation check를 한 후, 올바른 요청일 경우 DB에 SELECT 쿼리를 넘깁니다. </br>
         받아온 데이터에 이상이 있을 수 있으니, 데이터도 Validation check를 해줍니다. </br>
-        정확한 데이터일 경우 200 OK 요청과 데이터를 보내줍니다.        
+        정확한 데이터일 경우 200 OK 응답코드와 데이터를 보내줍니다.        
 			</td>
 		</tr>
 	</table>
@@ -155,7 +155,9 @@
 		</tr>
 		<tr>
 			<td align="center">
-				.
+				메세지 아이디를 Validation check를 한 후, 올바른 요청일 경우 DB에 SELECT 쿼리를 넘깁니다. </br>
+        받아온 데이터에 이상이 있을 수 있으니, 데이터도 Validation check를 해줍니다. </br>
+        정확한 데이터일 경우 200 OK 응답코드와 데이터를 보내줍니다.
 			</td>
 		</tr>
 	</table>
@@ -171,7 +173,8 @@
 		</tr>
 		<tr>
 			<td align="center">
-			  .
+			  body값에 대한 Validation check를 한 후, 올바른 요청일 경우 DB에 INSERT 쿼리를 넘깁니다. </br>
+        DB에 INSERT 성공 시 201 Created 응답코드를 보내줍니다. 
 			</td>
 		</tr>
 	</table>
@@ -187,7 +190,8 @@
 		</tr>
 		<tr>
 			<td align="center">
-				.
+				메세지 아이디와 body값에 대한 Validation check를 한 후, 올바른 요청일 경우 DB에 UPDATE 쿼리를 넘깁니다. </br>
+        DB에 UPDATE 성공 시 204 No Content 응답코드를 보내줍니다. 
 			</td>
 		</tr>
 	</table>
@@ -203,7 +207,8 @@
 		</tr>
 		<tr>
 			<td align="center">
-				.
+			  메세지 아이디를 Validation check를 한 후, 올바른 요청일 경우 DB에 DELETE 쿼리를 넘깁니다. </br>
+        DB에서 DELETE 성공 시 204 No Content 응답코드를 보내줍니다. 
 			</td>
 		</tr>
 	</table>
@@ -265,6 +270,8 @@
 # `7. 트러블 슈팅`
 
 <br/>
+트러블 슈팅 목차
+7.1. [DB Buffer Memory 문제](#71-db-buffer-memory-문제)
 
 ## ![✔] 7.1. DB Buffer Memory 문제
 
@@ -280,6 +287,10 @@
 | 쿼리 2번 요청    | X           | 11,652     | 19.25        | 80~100 ms      | 4,809          | 0       |
 
 🔗 [**자세히 보기: DB Buffer Memory 문제**](bufferMemory.md)
+
+## 7.1. DB Buffer Memory 문제
+
+여기로 이동해오는지 테스트
 
 <br/>
 
