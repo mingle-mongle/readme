@@ -254,14 +254,18 @@
 
 # `6. 성능 테스트`
 
-## ![✔] 6.1. 10분 테스트 내용(수정예정)
+## Postman Api Test
 
-<img src="./image/test.png"/>
+<img src="./image/responseTime.png"/>
 
-이 부분은 추가적으로 다시 테스트 한 후 수정할 예정입니다.
-포스트맨 캡쳐 사용하지 않을 예정입니다.
+| 요청 | 총 요청 수 | 초당 요청 수 | 평균 응답 시간 | 최소 응답 시간 | 최대 응답 시간 | Error % |
+| ---- | ---------- | ------------ | -------------- | -------------- | -------------- | ------- |
+| POST | 16,708     | 27.53        | 309 ms         | 62 ms          | 1,951 ms       | 0       |
+| GET  | 16,701     | 27.52        | 504 ms         | 165 ms         | 4,114 ms       | 0       |
 
-**핵심요약:** 10분간 어쩌구저쩌구.. 테스트했을시.. 어쩌구저쩌구..
+- 50명의 가상 사용자가 10분간 동시에 실행하는 것을 기준으로 테스트 해보았습니다.
+- POST 요청 시 서버의 평균 응답 속도는 309 ms 이고, 최대 응답 속도는 1,951 ms 로 측정되었습니다.
+- GET 요청 시 서버의 평균 응답 속도는 504 ms 이고, 최대 응답 속도는 4,114 ms 로 측정되었습니다.
 
 <br/>
 
@@ -271,9 +275,9 @@
 
 ## 트러블 슈팅 목차
 
-7-1 [PlanetScale 외래키 적용 불가능](#planetscale-외래키-적용-불가능) </br>
-7-2 [UUID_TO_BIN swap flag](#uuid_to_bin-swap-flag) </br>
-7-3 [DB Buffer Memory](#db-buffer-memory) </br>
+7.1. [PlanetScale 외래키 적용 불가능](#planetscale-외래키-적용-불가능) </br>
+7.2. [UUID_TO_BIN swap flag](#uuid_to_bin-swap-flag) </br>
+7.3. [DB Buffer Memory](#db-buffer-memory) </br>
 
 </br>
 
@@ -314,7 +318,7 @@ CREATE TABLE `user` (
 - SELECT 쿼리 요청 시 data 테이블과 user 테이블을 JOIN 하여 검색합니다.
 - SELECT 쿼리 요청 시 user의 정보는 항상 필요하고, 매 요청 시 JOIN을 하면 요청시간이 늘어나기 때문에 좋지 않다고 생각했습니다.
 
-**2.2. JSON dataType 사용 (최종 해결 방법)** 💡
+**2.2. JSON dataType 사용 (최종 해결 방법)** ✅
 
 ```json
 {
@@ -467,7 +471,7 @@ OFFSET (총 row - 20);
 - 총 row수를 먼저 가져온 후, OFFSET에 반영.
 - 평균 처리 속도 : 1,019ms
 
-**2.4. 인덱스 설정 후 커서 페이지네이션 (최종 해결 방법)** 💡
+**2.4. 인덱스 설정 후 커서 페이지네이션 (최종 해결 방법)** ✅
 
 ```sql
 SELECT BIN_TO_UUID AS msg_id
