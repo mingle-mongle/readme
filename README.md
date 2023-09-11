@@ -380,14 +380,14 @@ CREATE TABLE `user` (
 
 ```sql
 SELECT BIN_TO_UUID AS msg_id
-	, content
-	, type
-	, time
-	, image
-	, created
-	, updated
-	, user
-	, version
+     , content
+     , type
+     , time
+     , image
+     , created
+     , updated
+     , user
+     , version
   FROM data
  ORDER
     BY created DESC
@@ -410,7 +410,7 @@ OFFSET 0;
 **2.1. Buffer Size 늘리기**
 
 ```sql
-SET sort_buffer_size=2097152;
+SET sort_buffer_size = 2097152;
 ```
 
 - sort_buffer_size를 늘리더라도 메모리 부족 현상을 겪을 수 있습니다.
