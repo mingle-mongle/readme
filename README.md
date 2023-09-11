@@ -471,19 +471,19 @@ OFFSET (총 row - 20);
 
 ```sql
 SELECT BIN_TO_UUID AS msg_id
-  , content
-  , type
-	, time
-	, image
-	, created
-	, updated
-	, user
-	, version
+     , content
+     , type
+     , time
+     , image
+     , created
+     , updated
+     , user
+     , version
   FROM data
  WHERE time >= (
                 SELECT
-			                 time
-			            FROM data
+                       time
+                  FROM data
                  LIMIT 1
                 OFFSET 20
                 )
