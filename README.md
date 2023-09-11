@@ -288,7 +288,7 @@
 
 🔗 [**자세히 보기: DB Buffer Memory 문제**](bufferMemory.md)
 
-## 7.1 DB Buffer Memory 문제
+# 7.1 DB Buffer Memory 문제
 
 여기로 이동해오는지 테스트
 
