@@ -451,14 +451,14 @@ SELECT COUNT(*) FROM data;
 
 ```sql
 SELECT BIN_TO_UUID AS msg_id
-  , content
-	, type
-	, time
-	, image
-	, created
-	, updated
-	, user
-	, version
+    , content
+, type
+, time
+, image
+, created
+, updated
+, user
+, version
   FROM data
  LIMIT 20
 OFFSET (총 row - 20);
