@@ -421,19 +421,19 @@ SET sort_buffer_size=2097152;
 
 ```sql
 SELECT BIN_TO_UUID AS msg_id
-		 , content
-		 , type
-		 , time
-		 , image
-		 , created
-		 , updated
-		 , user
-		 , version
+     , content
+     , type
+     , time
+     , image
+     , created
+     , updated
+     , user
+     , version
   FROM (
         SELECT *
-				FROM data
-        ORDER
-        BY msg_id DESC
+          FROM data
+         ORDER
+            BY msg_id DESC
        ) AS Data
  LIMIT 20
 OFFSET 0;
