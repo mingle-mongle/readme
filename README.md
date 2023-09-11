@@ -271,7 +271,7 @@
 
 <br/>
 트러블 슈팅 목차
-7.1. [DB Buffer Memory 문제](#71-db-buffer-memory-문제)
+7.1. [DB Buffer Memory 문제](#7.1.-db-buffer-memory-문제)
 
 ## ![✔] 7.1. DB Buffer Memory 문제
 
