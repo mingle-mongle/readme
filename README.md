@@ -289,6 +289,8 @@
 
 🔗 [**자세히 보기: DB Buffer Memory 문제**](bufferMemory.md)
 
+<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+
 ## 7.1 DB Buffer Memory 문제
 
 여기로 이동해오는지 테스트
