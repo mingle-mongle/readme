@@ -272,7 +272,7 @@
 ## 트러블 슈팅 목차
 
 7-1 [PlanetScale 외래키 적용 불가능](#planetscale-외래키-적용-불가능) </br>
-7-2 [UUID_TO_BIN swap flag](#uuidtobin-swap-flag) </br>
+7-2 [UUID_TO_BIN swap flag](#uuid_to_bin-swap-flag) </br>
 7-3 [DB Buffer Memory](#db-buffer-memory) </br>
 
 </br>
@@ -282,8 +282,7 @@
 **핵심요약** </br>
 PlanetScale에서 외래키 생성이 불가능하여 mysql의 JSON type을 활용하여 user 컬럼을 생성했습니다.</br>
 
-**그렇게 하지 않을 경우** </br>
-데이터가 262KB(이미지 25개)이상 들어간 후 `ORDER BY` 쿼리를 사용하면 `out of sort memory (errno 1038)`가 발생한다. </br>
+</br>
 
 ### **1. 문제 정의**
 
@@ -343,7 +342,7 @@ CREATE TABLE `user` (
 
 <p align="right"><a href="#트러블-슈팅-목차">⬆ 트러블슈팅 목차로 돌아가기</a></p>
 
-</br>
+</br></br>
 
 ## UUID_TO_BIN Swap Flag
 
@@ -351,7 +350,7 @@ CREATE TABLE `user` (
 
 <p align="right"><a href="#트러블-슈팅-목차">⬆ 트러블슈팅 목차로 돌아가기</a></p>
 
-</br>
+</br></br>
 
 ## DB Buffer Memory
 
@@ -503,7 +502,7 @@ OFFSET 0;
 
 - Primary Key(msg_id)는 기본값으로 ASC 정렬로 생성 되기 때문에 인덱스 정렬에 사용하지 않았습니다.
 - 총 row 수를 가져와 다시 요청을 보내는 쿼리와 인덱스 설정하는 방법은 ORDER BY를 사용하지 않기 때문에 Sorting Error가 나지 않습니다.
-- DESC 인덱스 사용하는 쿼리문으로 바꾼 후 약 43.8% 빨라졌습니다.
+- **DESC 인덱스 사용하는 쿼리문으로 바꾼 후 약 43.8% 빨라졌습니다.**
 - 최종적으로 DESC 인덱스 쿼리를 사용했습니다.
 
 </br>
@@ -516,6 +515,6 @@ OFFSET 0;
 
 <p align="right"><a href="#트러블-슈팅-목차">⬆ 트러블슈팅 목차로 돌아가기</a></p>
 
-<br/>
+<br/></br>
 
-<p align="right"><a href="#목차">⬆ 목차로 돌아가기</a></p>
+<p align="right"><a href="#guzzi-프로젝트">⬆ 맨 위로 올라가기</a></p>
