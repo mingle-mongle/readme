@@ -120,9 +120,9 @@
 		</tr>
 		<tr>
 			<td align="center">
-				Client : REACT
-        Server : Aws App Runner(Express)
-        Database : PlanetScale(MySQL)
+				Client : REACT </br>
+        Server : Aws App Runner(Express) </br>
+        Database : PlanetScale(MySQL) </br>
 			</td>
 		</tr>
 	</table>
@@ -138,9 +138,9 @@
 		</tr>
 		<tr>
 			<td align="center">
-				페이지 Validation check를 한 후, 올바른 요청일 경우 DB에 쿼리를 넘깁니다.
-        받아온 데이터에 이상이 있을 수 있으니, 데이터도 Validation check를 해줍니다.
-        정확한 데이터일 경우 200 OK 요청과 데이터를 보내줍니다.       
+				페이지 Validation check를 한 후, 올바른 요청일 경우 DB에 쿼리를 넘깁니다. </br>
+        받아온 데이터에 이상이 있을 수 있으니, 데이터도 Validation check를 해줍니다. </br>
+        정확한 데이터일 경우 200 OK 요청과 데이터를 보내줍니다.        
 			</td>
 		</tr>
 	</table>
