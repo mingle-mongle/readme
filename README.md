@@ -295,18 +295,20 @@
 
 ## DB Buffer Memory
 
-**핵심요약:** Sort Buffer Memory 부족을 해결하기 위해 인덱스를 사용했다.
+**핵심요약** </br>
+Sort Buffer Memory 부족을 해결하기 위해 인덱스를 사용했다.</br>
 
-**그렇게 하지 않을 경우:** 데이터가 262KB(이미지 25개)이상 들어간 후 "ORDER BY" 쿼리를 사용하면 `out of sort memory (errno 1038)`가 발생한다.
+**그렇게 하지 않을 경우** </br>
+데이터가 262KB(이미지 25개)이상 들어간 후 `ORDER BY` 쿼리를 사용하면 `out of sort memory (errno 1038)`가 발생한다. </br>
 
 ### **1. 문제 정의**
 
 ```sql
 {
     "error": "Error: target: chatting.-.primary: vttablet: rpc error:
-							code = ResourceExhausted desc = Out of sort memory,
-							consider increasing server sort buffer size (errno 1038) (sqlstate HY001):,
-							BindVars: {REDACTED}"
+code = ResourceExhausted desc = Out of sort memory,
+consider increasing server sort buffer size (errno 1038) (sqlstate HY001):,
+BindVars: {REDACTED}"
 }
 ```
 
@@ -335,9 +337,9 @@ OFFSET 0;
   - image 컬럼의 데이터타입은 TEXT로 1개 당 최대 50KB이다.
   - 25개 이상부터 데이터를 sorting 하려하면 문제가 발생했다.
 
-### **2. 문제 해결 과정**
+</br>
 
----
+### **2. 문제 해결 과정**
 
 **2.1. Buffer Size 늘리기**
 
@@ -348,8 +350,6 @@ SET sort_buffer_size=2097152;
 - sort_buffer_size를 늘리더라도 메모리 부족 현상을 겪을 수 있다.
 - 메모리 부족 현상이 일어나면 MySQL의 프로세스가 강제로 종료될 수 있다.
 - 버퍼 사이즈를 늘리는 방법은 근본적인 해결 방법이 아니라고 생각했다.
-
----
 
 **2.2. 서브쿼리 사용**
 
@@ -377,8 +377,6 @@ OFFSET 0;
 - 현재 상황에서 buffer 메모리 부족은 일어나지 않지만 “ORDER BY”를 사용하기 때문에 추후에 메모리 부족 문제가 발생할 수 있음.
 - Backward Index Scan은 Forward Index Scan 보다 느림.
 
----
-
 **2.3. 쿼리 2번 요청**
 
 ```sql
@@ -402,8 +400,6 @@ OFFSET (총 row - 20);
 
 - 총 row수를 먼저 가져온 후, OFFSET에 반영.
 - 평균 처리 속도 : 1,019ms
-
----
 
 **2.4. 인덱스 설정 후 커서 페이지네이션 (최종 해결 방법)**
 
@@ -434,6 +430,8 @@ OFFSET 0;
 - Forward Index Scan으로 진행되기 때문에 속도가 더 빠르다.
 - 평균 처리 속도 : 573ms
 
+</br>
+
 ### **3. 문제 해결 결과**
 
 - Primary Key(msg_id)는 기본값으로 ASC 정렬로 생성 되기 때문에 인덱스 정렬에 사용하지 않았다.
@@ -447,6 +445,8 @@ OFFSET 0;
 | ---------------- | ----------- | ---------- | ------------ | -------------- | -------------- | -------------- | ------- |
 | DESC 인덱스 사용 | O           | 11,669     | 19.28        | 573 ms         | 196 ms         | 3,212 ms       | 0       |
 | 쿼리 2번 요청    | X           | 11,652     | 19.25        | 1,019 ms       | 319 ms         | 4,809 ms       | 0       |
+
+</br>
 
 ### **4. 참고 자료 및 링크**
 
