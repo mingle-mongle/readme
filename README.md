@@ -269,12 +269,31 @@
 
 # `7. 트러블 슈팅`
 
-<br/>
-트러블 슈팅 목차 </br>
+## 트러블 슈팅 목차
 
-7.1 [DB Buffer Memory 문제](#7.1-db-buffer-memory-문제)
+7-1 [PlanetScale 외래키 적용 불가능](#planetscale-외래키-적용-불가능) </br>
+7-2 [UUID_TO_BIN swap flag](#uuidtobin-swap-flag) </br>
+7-3 [DB Buffer Memory](#db-buffer-memory) </br>
 
-<!-- ## ![✔] 7.1. DB Buffer Memory 문제 -->
+</br>
+
+## PlanetScale 외래키 적용 불가능
+
+</br>
+
+<p align="right"><a href="#트러블-슈팅-목차">⬆ 트러블슈팅 목차로 돌아가기</a></p>
+
+</br>
+
+## UUID_TO_BIN Swap Flag
+
+</br>
+
+<p align="right"><a href="#트러블-슈팅-목차">⬆ 트러블슈팅 목차로 돌아가기</a></p>
+
+</br>
+
+## DB Buffer Memory
 
 **핵심요약:** Sort Buffer Memory 부족을 해결하기 위해 인덱스를 사용했다.
 
@@ -289,11 +308,7 @@
 
 🔗 [**자세히 보기: DB Buffer Memory 문제**](bufferMemory.md)
 
-<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-
-## 7.1 DB Buffer Memory 문제
-
-여기로 이동해오는지 테스트
+<p align="right"><a href="#트러블-슈팅-목차">⬆ 트러블슈팅 목차로 돌아가기</a></p>
 
 <br/>
 
