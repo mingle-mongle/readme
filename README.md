@@ -226,17 +226,17 @@
 
 채팅 메세지에 관련된 정보를 저장합니다.
 
-|  Field  |     Type     | Null |     Key     |       Default       |                     Extra                     |
-| :-----: | :----------: | :--: | :---------: | :-----------------: | :-------------------------------------------: |
-| msg_id  |  BINARY(16)  |  NO  | PRIMARY KEY | UUID_TO_BIN(UUID()) |               DEFAULT_GENERATED               |
-| content |     TEXT     |  NO  |     YES     |                     |                                               |
-|  type   | VARCHAR(255) | YES  |             |                     |                                               |
-|  time   |  BIGINT(20)  | YES  |             |                     |                                               |
-|  image  |     TEXT     | YES  |             |                     |                                               |
-| created |  TIMESTAMP   |  NO  |             |  CURRENT_TIMESTAMP  |               DEFAULT_GENERATED               |
-| updated |  TIMESTAMP   | YES  |             |  CURRENT_TIMESTAMP  | DEFAULT_GENERATED ON UPDATE CURRENT TIMESTAMP |
-|  user   |     JSON     | YES  |             |                     |                                               |
-| version | VARCHAR(255) | YES  |             |                     |                                               |
+|  Field  |     Type     | Null |     Key     |        Default         |                     Extra                     |
+| :-----: | :----------: | :--: | :---------: | :--------------------: | :-------------------------------------------: |
+| msg_id  |  BINARY(16)  |  NO  | PRIMARY KEY | UUID_TO_BIN(UUID(), 1) |               DEFAULT_GENERATED               |
+| content |     TEXT     |  NO  |     YES     |                        |                                               |
+|  type   | VARCHAR(255) | YES  |             |                        |                                               |
+|  time   |  BIGINT(20)  | YES  |             |                        |                                               |
+|  image  |     TEXT     | YES  |             |                        |                                               |
+| created |  TIMESTAMP   |  NO  |             |   CURRENT_TIMESTAMP    |               DEFAULT_GENERATED               |
+| updated |  TIMESTAMP   | YES  |             |   CURRENT_TIMESTAMP    | DEFAULT_GENERATED ON UPDATE CURRENT TIMESTAMP |
+|  user   |     JSON     | YES  |             |                        |                                               |
+| version | VARCHAR(255) | YES  |             |                        |                                               |
 
 <br/>
 
@@ -372,7 +372,7 @@ CREATE TABLE `user` (
 
 ### **2. 문제 해결 과정**
 
-**2.1. 직접 데이터를 넣어 테스트 해보기**
+**2.1. 직접 데이터를 넣어 테스트 해보기** ✅
 
 ```sql
 DEFAULT 값이 (UUID_TO_BIN(UUID(), 0)) 일 경우
