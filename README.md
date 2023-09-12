@@ -2,7 +2,7 @@
 
 # GUZZI 프로젝트
 
-<img src="./image/guzzi.png">
+<img src="./image/guzzi.gif">
 
 <br/>
 
@@ -10,9 +10,9 @@
 
 1. [프로젝트 설명](#1-프로젝트-설명)
 2. [기술 스택](#2-기술-스택-technique-used)
-3. [아키텍처 시각화](#3-아키텍처-및-시퀀스-다이어그램)
+3. [아키텍처 및 시퀀스 다이어그램](#3-아키텍처-및-시퀀스-다이어그램)
 4. [DB 구성](#4-db-구성)
-5. [API-명세](#5-api-명세)
+5. [API 명세](#5-api-명세)
 6. [성능 테스트](#6-성능-테스트)
 7. [트러블 슈팅](#7-트러블-슈팅)
 
@@ -26,11 +26,15 @@
 최근 경기악화와 물가상승, 금리 인상 등으로 으로 인해 생활비를 절약하자는 분위기가 생성되고 있습니다. <br/>
 혼자서는 소비를 절제하기 힘들지만 함께 절약함으로써 동기부여도 되고, 절약을 즐겁게 만들고 싶어 제작하게 되었습니다.
 
+</br>
+
 ## 프로젝트 링크
 
 최종 배포 링크 : https://all-chat.netlify.app/guzzi </br>
 백엔드 Repo 링크 : https://github.com/mingle-mongle/guzzi </br>
 프론트엔드 Repo 링크 : https://github.com/HyeyonJ/room-of-GUZZI </br>
+
+</br>
 
 ## Directory Structure
 
@@ -86,6 +90,8 @@
 | :-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
 |                                                                                     [MySQL](https://www.mysql.com/)                                                                                     |
 
+</br>
+
 ## 사용된 오픈소스(Used Open Source)
 
 - backend
@@ -100,7 +106,7 @@
   - [swagger-jsdoc](https://github.com/Surnet/swagger-jsdoc)
   - [swagger-ui](https://github.com/swagger-api/swagger-ui)
 
-<br/>
+<br/></br>
 
 <p align="right"><a href="#목차">⬆ 목차로 돌아가기</a></p>
 
