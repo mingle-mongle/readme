@@ -1,6 +1,6 @@
 [✔]: ./image/checkbox-small-blue.png
 
-# GUZZI 프로젝트
+# GUZZI ROOM PROJECT
 
 <img src="./image/guzzi.gif">
 
@@ -593,8 +593,10 @@ OFFSET 0;
 - [https://dev.mysql.com/doc/refman/8.0/en/descending-indexes.html](https://dev.mysql.com/doc/refman/8.0/en/descending-indexes.html)
 - [https://tech.kakao.com/2018/06/19/mysql-ascending-index-vs-descending-index/](https://tech.kakao.com/2018/06/19/mysql-ascending-index-vs-descending-index/)
 
+</br>
+
 <p align="right"><a href="#트러블-슈팅-목차">⬆ 트러블슈팅 목차로 돌아가기</a></p>
 
 <br/></br>
 
-<p align="right"><a href="#guzzi-프로젝트">⬆ 맨 위로 올라가기</a></p>
+<p align="right"><a href="#guzzi-room-project">⬆ 맨 위로 올라가기</a></p>
