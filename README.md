@@ -111,7 +111,7 @@
   <li> ᐅ 아키텍처 </li>
 	<table align="center">
 		<tr>
-			<td align="center"><b>3tier architecture</b></td>
+			<td align="center"><b>3-Tier Architecture</b></td>
 		</tr>
 		<tr>
 			<td align="center">
@@ -258,14 +258,16 @@
 
 <img src="./image/responseTime.png"/>
 
-| 요청 | 총 요청 수 | 초당 요청 수 | 평균 응답 시간 | 최소 응답 시간 | 최대 응답 시간 | Error % |
-| ---- | ---------- | ------------ | -------------- | -------------- | -------------- | ------- |
-| POST | 16,708     | 27.53        | 309 ms         | 62 ms          | 1,951 ms       | 0       |
-| GET  | 16,701     | 27.52        | 504 ms         | 165 ms         | 4,114 ms       | 0       |
+| 요청  | 총 요청 수 | 초당 요청 수 | 평균 응답 시간 | 최소 응답 시간 | 최대 응답 시간 | Error % |
+| ----- | ---------- | ------------ | -------------- | -------------- | -------------- | ------- |
+| POST  | 16,708     | 27.53        | 309 ms         | 62 ms          | 1,951 ms       | 0       |
+| GET   | 16,701     | 27.52        | 504 ms         | 165 ms         | 4,114 ms       | 0       |
+| TOTAL | 33,409     | 55.05        | 407 ms         |                |                | 0       |
 
 - 50명의 가상 사용자가 10분간 동시에 실행하는 것을 기준으로 테스트 해보았습니다.
-- POST 요청 시 서버의 평균 응답 속도는 309 ms 이고, 최대 응답 속도는 1,951 ms 로 측정되었습니다.
+- POST 요청 시 서버의 평균 응답 속도는 309 ms 이고, 최대 응답 속도는 1,951 ms로 측정되었습니다.
 - GET 요청 시 서버의 평균 응답 속도는 504 ms 이고, 최대 응답 속도는 4,114 ms 로 측정되었습니다.
+- 1초당 55.05개의 요청을 처리했다는 결과를 확인할 수 있었습니다.
 
 <br/>
 
@@ -354,6 +356,67 @@ CREATE TABLE `user` (
 </br></br>
 
 ## UUID_TO_BIN Swap Flag
+
+**핵심요약** </br>
+
+> `UUID_TO_BIN()` 의 swap_flag를 1로 사용하고, 그 값을 그대로 가져오고 싶다면 `BIN_TO_UUID()`의 swap_flag는 0을 사용해야 합니다.</br>
+
+### **1. 문제 정의**
+
+- 문제
+  - UUID_TO_BIN() 과 BIN_TO_UUID()의 swap_flag에 따라 받아와지는 결과값이 차이가 남.
+- 문제 발생 원인
+  - swap_flag 설정을 둘 다 같은 값으로 설정했음.
+
+</br>
+
+### **2. 문제 해결 과정**
+
+**2.1. 직접 데이터를 넣어 테스트 해보기**
+
+```sql
+DEFAULT 값이 (UUID_TO_BIN(UUID(), 0)) 일 경우
+생성된 uuid(BINARY) >> "0x230ab26950fc11eeaf0adae9cf8f8644"
+
+DEFAULT 값이 (UUID_TO_BIN(UUID(), 1)) 일 경우
+생성된 uuid(BINARY) >> "0x11ee50fc0f6ca9eeaf0adae9cf8f8644"
+```
+
+```sql
+<< DEFAULT (UUID_TO_BIN(UUID(), 1)) >>
+
+SELECT BIN_TO_UUID(uuid, 0) FROM data;
+결과값(STRING) >> "11ee50fc-0f6c-a9ee-af0a-dae9cf8f8644"
+
+SELECT BIN_TO_UUID(uuid, 1) FROM data;
+결과값(STRING) >> "0f6ca9ee-50fc-11ee-af0a-dae9cf8f8644"
+```
+
+- UUID_TO_BIN() 함수는 생성된 UUID 를 binary 로 convert 해주는 함수 입니다.
+  - swap_flag 가 0 : 기본 UUID 문자열과 동일하게 담깁니다.
+  - swap_flag 가 1 : 16진수의 첫 번째 및 세 번째 그룹을 교환하여 더 빠르게 변하는 부분을 오른쪽으로 이동시켜 시간순 정렬화가 된 데이터로 담깁니다.
+- **data 테이블의 DEFAULT 값으로 생성되는 UUID_TO_BIN()의 swap_flag는 1로 설정했습니다.**
+- BIN_TO_UUID(uuid, 0) 일 경우, 시간순 정렬화된 상태 그대로 STRING으로 변환시켜 줍니다.
+- BIN_TO_UUID(uuid, 1) 일 경우, 시간순 정렬화된 상태를 다시 재배치하여 STRING으로 변환시켜 줍니다.
+- **제가 원하는 값은 시간순 정렬화된 값이기 때문에 BIN_TO_UUID()의 swap_flag는 0으로 설정했습니다.**
+
+</br>
+
+### **3. 문제 해결 결과**
+
+<img src="./image/uuidV1.png"/>
+
+- UUID(Universally Unique Identifier)는 공개 소프트웨어 재단(OSF)에서 만든 고유성이 보장되는 표준 규약입니다.
+- MySQL 8버전부터 `UUID()` 생성 시 자동으로 UUID V1을 사용합니다.
+- UUID V1은 TIMESTAMP와 MAC 주소를 기반으로 생성됩니다.
+- `UUID_TO_BIN()` 의 swap_flag를 1로 사용하고, 그 값을 그대로 가져오고 싶다면 `BIN_TO_UUID()`의 swap_flag는 0을 사용해야 합니다.
+
+</br>
+
+### **4. 참고 자료 및 링크**
+
+- [https://dev.mysql.com/doc/refman/8.0/en/miscellaneous-functions.html](https://dev.mysql.com/doc/refman/8.0/en/miscellaneous-functions.html)
+- [https://dev.mysql.com/doc/refman/8.0/en/miscellaneous-functions.html#function_uuid](https://dev.mysql.com/doc/refman/8.0/en/miscellaneous-functions.html#function_uuid)
 
 </br>
 
