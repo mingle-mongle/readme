@@ -304,7 +304,7 @@ VT10001: foreign key constraints are not allowed
 - 문제
   - PlanetScale 테이블 생성 시 외래키 생성 불가
 - 문제 발생 원인
-  - PlanetScale은 외래키를 지원하지 않음.
+  - PlanetScale은 외래키 제약조건을 지원하지 않음.
 
 </br>
 
