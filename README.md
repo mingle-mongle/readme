@@ -30,7 +30,7 @@
 
 ## 프로젝트 링크
 
-최종 배포 링크 : https://all-chat.netlify.app/guzzi </br>
+최종 배포 링크 : [GUZZI-ROOM](https://all-chat.netlify.app/guzzi) </br>
 백엔드 Repo 링크 : https://github.com/mingle-mongle/guzzi </br>
 프론트엔드 Repo 링크 : https://github.com/HyeyonJ/room-of-GUZZI </br>
 
@@ -250,9 +250,11 @@
 
 # `5. API 명세`
 
-## ![✔] 5.1. Swagger
+## 5.1. Swagger
 
-🔗 [**Swagger Link : API 테스트 가능**](링크 넣어야함)
+<img src="./image/swagger.png"/>
+
+🔗 [**Swagger Link : API 테스트 가능**](https://aabnh8if56.ap-northeast-1.awsapprunner.com/api-docs/)
 
 <br/>
 
